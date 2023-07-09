@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block section %}
+{% load crispy_forms_tags %}
+
+<link rel="stylesheet" href="{% static 'main.css' %}">
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        {% if user.is_authenticated %}
+        <h1>{{user.username}}</h1>
+        <h1>{{user.email}}</h1>
+        <a id="open-form" style="text-decoration: none;">
+            <button class="btn btn-outline-dark mb-4" style="margin-top: 20px;">Edit</button>
+        </a>
+        
+        {% else %}
+        <h1>You haven't login yet!</h1>
+        <form action="/login">
+            <div class="form-group" id="signup-button">
+                <button class="btn btn-outline-dark mb-4" style="margin-top: 20px;">Login</button>
+            </div>
+            <div class="form-group">
+                <small class="text-muted ml-3" >Don't have an account yet? <a href="/register/">Sign up</a></small>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+<div class="shadow-off"></div>
+<div class="container-form popup">
+    <div class="close-btn">&times;</div>
+    <form action="" method="POST">
+        {% csrf_token %}
+      <fieldset class="form-group">
+          <legend class="border-bottom mb-4" style="color: black;">Edit Account</legend>
+          {{ form|crispy }}
+      </fieldset>
+      <div class="form-group" style="margin-top: 20px;" id="signup-button">
+          <button class="btn btn-outline-dark mb-4">Save</button>
+      </div>
+    </form>
+</div>
+<script src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}

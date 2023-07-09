@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous">
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'js/scripts.js' %}" defer></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="nav nav-pills nav-stacked">
+                                                                                                                          
+            <li>
+                <a href="/" class="logo-icon">
+                    <img src="{% static 'img/cat1.jpg' %}" alt="Anchanted">
+                    <span class="nav-item">
+                        {% if user.is_authenticated %}
+                        {{user.username}}
+                        {% else %}
+                        Welcome!
+                        {% endif %}
+                    </span>
+                </a>
+            </li>
+            <li><a {% if request.path == "/" or request.path == "/logout/"%}class="active"{% endif %} href="/">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-item">Home</span>
+                </a></li>
+            <li><a {% if request.path == "/profile/" %}class="active"{% endif %} href="/profile">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-item">Profile</span>
+                </a></li>
+            <li><a {% if request.path == "/admin/" %}class="active"{% endif %} href="/admin">
+                    <i class="fas fa-newspaper"></i>
+                    <span class="nav-item">Admin</span>
+                </a></li>
+            <li><a href="#">
+                    <i class="fas fa-gear"></i>
+                    <span class="nav-item">Settings</span>
+                </a></li>
+            <li><a href="#">
+                    <i class="fas fa-question-circle"></i>
+                    <span class="nav-item">Help</span>
+                </a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/logout" class="logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="nav-item">Sign out</span>
+            </a></li>
+            {% else %}
+            <li><a href="/login" class="signin">
+                <i class="fas fa-solid fa-right-to-bracket"></i>
+                <span class="nav-item">Sign in</span>
+            </a></li>
+            <li><a href="/register" class="register">
+                <i class="fas fa-solid fa-file-signature"></i>
+                <span class="nav-item">Register</span>
+            </a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="content">
+        {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success">
+                        <strong>{{ message }}</strong>
+                    </div>    
+                {% endfor %}
+            {% endif %}    
+        <header>
+            <div class="logo">
+                <img src="{% static 'img/cat1.jpg' %}" href="#" class="mx-auto d-block" alt="Bootstrap" width="12%">
+            </div>
+            <div class="container">
+                <p class="text-center fs-2 lh-1">
+                    <a class="link-dark link-offset-2 link-underline link-underline-opacity-0" href="#">
+                        {% if user.is_authenticated %}
+                        {{user.username}}
+                        {% else %}
+                        Welcome!
+                        {% endif %}
+                    </a>
+                </p>
+                <p class="text-center fw-light lh-1">velit scelerisque in dictum non consectetur a erat nam at</p>
+            </div>
+            <div class="container-fluid icons">
+                <p class="text-center font-monospace">
+                    <i class="fa-brands fa-facebook fa-lg" style="color: #4d4d4d;"></i>
+                    <i class="fa-brands fa-github fa-lg" style="color: #4d4d4d;"></i>
+                    <i class="fa-brands fa-instagram fa-lg" style="color: #4d4d4d;"></i>
+                    <i class="fa-brands fa-twitter fa-lg" style="color: #4d4d4d;"></i>
+                    <i class="fa-brands fa-linkedin fa-lg" style="color: #4d4d4d;"></i>
+                </p>
+            </div>
+        </header>
+        {% block section %}
+        {% endblock %}
+    
+        <footer class="text-center text-white" style="background-color: #222222;">
+            <div class="container p-4 pb-0">
+                <section class="" style="padding: 5vh 0;">
+                    <form action="">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-auto">
+                                <p class="pt-2 fw-medium">Sign up for our newsletter
+                                </p>
+                            </div>
+                            <div class="col-md-5 col-12">
+                                <!-- Email input -->
+                                <div class="form-outline form-white mb-4">
+                                    <input type="email" id="form5Example2" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-outline-light mb-4">
+                                    Subscribe
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2023 Anchanted
+                <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            </div>
+        </footer>
+    </div>
+    
+</body>
+
+</html>
