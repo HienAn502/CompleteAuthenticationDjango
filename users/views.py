@@ -48,9 +48,9 @@ def profile(request):
     return render(request, "profile.html", {"form": form})
 
 
-def changeAccount(request):
+def changeUsernamePassword(request):
     if request.method == "POST":
-        form = AccountChangeForm(request.POST, instance=request.user)
+        form = AccountChangeForm(request.user, data=request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get("username")
@@ -60,6 +60,23 @@ def changeAccount(request):
 
             return redirect("users:index")
     else:
-        form = AccountChangeForm()
+        form = AccountChangeForm(request.user)
     open_form = True
-    return render(request, "profile.html", {"open_form": open_form, "form": form})
+    return render(request, "updateAccount.html", {"open_form": open_form, "form": form})
+
+
+def changeFirstLastName(request):
+    if request.method == 'POST':
+        form = UserInfoChangeForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            firstname = form.cleaned_data.get("first_name")
+            lastname = form.cleaned_data.get("last_name")
+            messages.success(
+                request, f"Hi {firstname} {lastname}, your account was updated successfully!"
+            )
+
+    else:
+        form = UserInfoChangeForm(request.user)
+    open_form = True
+    return render(request, "updateAccount.html", {"form": form})

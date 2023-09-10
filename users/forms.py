@@ -64,8 +64,43 @@ class AccountChangeForm(PasswordChangeForm):
         ),
     )
 
-    field_order = ["username", "old_password", "new_password1", "new_password2"]
+    field_order = ["username", "old_password",
+                   "new_password1", "new_password2"]
 
     class Meta:
         model = User
         fields = ["username", "old_password", "new_password1", "new_password2"]
+
+
+class UserInfoChangeForm(UserChangeForm):
+    first_name = forms.CharField(
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "autocomplete": "current-firstname",
+                "autofocus": True,
+                "class": "form-control",
+                "placeholder": "First Name",
+            }
+        ),
+    )
+
+    last_name = forms.CharField(
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "autocomplete": "current-lastname",
+                "autofocus": True,
+                "class": "form-control",
+                "placeholder": "Last Name",
+            }
+        ),
+    )
+
+    field_order = ["first_name", "last_name"]
+
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name"]

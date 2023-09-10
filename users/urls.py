@@ -16,5 +16,6 @@ urlpatterns = [
         name="logout",
     ),
     path("profile/", views.profile, name="profile"),
-    path("account/update/", views.changeAccount, name="updateAccount"),
+    path("account/update/up", views.changeUsernamePassword, name="updateAccountUP"),
+    path("account/update/fl", views.changeFirstLastName, name="updateAccountFL"),
 ]

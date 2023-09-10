@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 })
 
-document.querySelector("a#open-form").addEventListener("click", function() {
+document.querySelector(".info-card__button").addEventListener("click", function() {
     document.querySelector(".popup").classList.add("on");
     document.querySelector(".shadow-off").classList.add("shadow-on");
 });
